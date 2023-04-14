@@ -7,35 +7,10 @@ import * as THREE from 'three';
 import gifImage from './gifhead.gif';
 import gifComp from './giphy.gif'
 
-const paperStyle1 = {
-    backgroundColor: 'white', height: '65vh', width: '100vh', display: 'flex', justifyContent: 'center', paddingTop: 2,
-    opacity: 0, // Set initial opacity to 0
-    transition: 'opacity 0.5s ease-in', boxShadow: 0
-}
-
-const paperStyle2 = {
-    backgroundColor: 'tomato',
-    height: '25vh',
-    width: '25vh',
-    display: 'flex',
-    justifyContent: 'center',
-    paddingTop: 5,
-    opacity: 0, // Set initial opacity to 0
-    transition: 'opacity 0.5s ease-in', // Add transition for smooth fading effect
-}
-
-const paperStyle3 = {
-    backgroundColor: 'green', height: '65vh', width: '50vh', display: 'flex', justifyContent: 'center', paddingTop: 5,
-    opacity: 0, // Set initial opacity to 0
-    transition: 'opacity 0.5s ease-in', marginBottom: 5
-}
-const paperStyle3_2 = {
-    backgroundColor: 'white', display: 'flex', justifyContent: 'center', paddingTop: 5, boxShadow: 0,
-    opacity: 0, // Set initial opacity to 0
-    transition: 'opacity 0.5s ease-in', marginBottom: 5
-}
 
 const DashboardPage = () => {
+
+    const [marginLeft, setMarginLeft] = useState(0);
     const componentRef1 = useRef(null);
     const componentRef2_1 = useRef(null);
     const componentRef2_2 = useRef(null);
@@ -50,6 +25,59 @@ const DashboardPage = () => {
     const componentRef4_1 = useRef(null);
     const componentRef4_2 = useRef(null);
 
+    const componentRefText_1 = useRef(null);
+    const componentRefText_2 = useRef(null);
+    const componentRefText_3 = useRef(null);
+    const componentRefText_4 = useRef(null);
+    const componentRefText_5 = useRef(null);
+    const componentRefText_6 = useRef(null);
+
+
+    // ........
+
+    const paperStyle1 = {
+        backgroundColor: 'white', height: '65vh', width: '100vh', display: 'flex', justifyContent: 'center', paddingTop: 2,
+        opacity: 0, // Set initial opacity to 0
+        transition: 'opacity 0.5s ease-in', 
+        boxShadow: 0,
+
+    }
+
+    const paperStyle2 = {
+        backgroundColor: 'tomato',
+        height: '15vh',
+        width: '20vh',
+        '@media (max-width: 400px)': {
+            width:'15vh', height:'10vh', 
+          },
+        display: 'flex',
+      borderRadius:40,
+        justifyContent: 'center',
+        paddingTop: 5,
+        opacity: 0, // Set initial opacity to 0
+        transition: 'opacity 0.5s ease-in, margin-left 0.5s ease-in', // Add transition for smooth fading effect
+
+    }
+
+    const paperStyle3 = {
+        backgroundColor: 'green', height: '65vh', width: '50vh', display: 'flex', justifyContent: 'center', paddingTop: 5,
+        opacity: 0, // Set initial opacity to 0
+
+        transition: 'opacity 0.5s ease-in', marginBottom: 5,
+
+    }
+    const paperStyle3_2 = {
+        backgroundColor: 'white', display: 'flex', justifyContent: 'center', paddingTop: 5, boxShadow: 0,
+        opacity: 0, // Set initial opacity to 0
+        transition: 'opacity 0.5s ease-in', marginBottom: 5,
+
+    }
+
+
+    // ........
+
+
+
     useEffect(() => {
         const observerOptions = {
             root: null,
@@ -63,12 +91,15 @@ const DashboardPage = () => {
                     // Component is in viewport, trigger animations or actions here
                     // Update opacity to 1 to fade in the component
                     entry.target.style.opacity = 1;
-                    console.log('Component is in viewport:', entry.target, entry.target.style.opacity);
+
+                    // Update the marginLeft property of paperStyle1 based on the calculated distance
+                    entry.target.style.marginLeft = `50px`;
+             
                 }
-                else {
-                    // Component is not in viewport, update opacity to 0 to fade out the component
-                    entry.target.style.opacity = 0;
-                }
+                // else {
+                //     // Component is not in viewport, update opacity to 0 to fade out the component
+                //     entry.target.style.opacity = 0;
+                // }
             });
         }, observerOptions);
 
@@ -86,6 +117,13 @@ const DashboardPage = () => {
         observer.observe(componentRef3_5.current);
         observer.observe(componentRef4_1.current);
         observer.observe(componentRef4_2.current);
+        observer.observe(componentRefText_1.current);
+        observer.observe(componentRefText_2.current);
+        observer.observe(componentRefText_3.current);
+        observer.observe(componentRefText_4.current);
+        observer.observe(componentRefText_5.current);
+        observer.observe(componentRefText_6.current);
+
 
         // ... Observe other components' refs
 
@@ -97,8 +135,8 @@ const DashboardPage = () => {
 
     return (
         <>
-            <Typography sx={{ marginTop: 10, marginLeft: '20vh', fontSize: 26 }}>Olá, eu sou o Lucas</Typography>
-            <Typography sx={{ marginBottom: 2, marginLeft: '20vh', fontSize: 20, color: 'grey' }}>A gabi ama o lu</Typography>
+            <Typography ref={componentRefText_1} sx={{ marginTop: 10, fontSize: 26, opacity:0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', }}>Olá, eu sou o Lucas</Typography>
+            <Typography ref={componentRefText_2} sx={{ marginBottom: 2,  fontSize: 20, color: 'grey', opacity:0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', }}>A gabi ama o lu</Typography>
             <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '5vh' }}>
                 <Paper ref={componentRef1} sx={paperStyle1}>
                     <img src={gifComp} alt="GIF" />
@@ -106,32 +144,33 @@ const DashboardPage = () => {
 
             </Box>
 
-            <Typography sx={{ marginTop: 8, marginLeft: '20vh', fontSize: 26 }}>Teste para texto com three.js</Typography>
-            <Typography sx={{ marginBottom: 2, marginLeft: '20vh', fontSize: 20, color: 'grey' }}>ele é o amor da vida dela </Typography>
-            <Box columnGap={5} sx={{ display: 'flex', justifyContent: 'center', marginTop: 10, }}>
-                <Paper ref={componentRef2_1} sx={paperStyle2}>A</Paper>
-                <Paper ref={componentRef2_2} sx={paperStyle2}>gabi</Paper>
-                <Paper ref={componentRef2_3} sx={paperStyle2}>quer</Paper>
-                <Paper ref={componentRef2_4} sx={paperStyle2}>te</Paper>
-                <Paper ref={componentRef2_5} sx={paperStyle2}>dar</Paper>
-            </Box>
-            <Box columnGap={5} sx={{ display: 'flex', justifyContent: 'center', marginTop: 5, }}>
-                <Paper ref={componentRef3_1} sx={paperStyle2}>come </Paper>
-                <Paper ref={componentRef3_2} sx={paperStyle2}>A</Paper>
-                <Paper ref={componentRef3_3} sx={paperStyle2}>gabi</Paper>
-                <Paper ref={componentRef3_4} sx={paperStyle2}>por </Paper>
-                <Paper ref={componentRef3_5} sx={paperStyle2}>favor </Paper>
-            </Box>
+            <Typography ref={componentRefText_3} sx={{ marginTop: 8, marginLeft: '20vh', fontSize: 26, opacity:0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', }}>Teste para texto com three.js</Typography>
+            <Typography ref={componentRefText_4} sx={{ marginBottom: 2, marginLeft: '20vh', fontSize: 20, color: 'grey', opacity:0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', }}>ele é o amor da vida dela </Typography>
+            <Grid columnGap={5} spacing={2} rowGap={15} container sx={{ display: 'flex', justifyContent: 'center', marginTop: 10, }} >
+            <Grid item ><Paper ref={componentRef2_1} sx={paperStyle2}>SIMMMM</Paper></Grid>
+            <Grid item>   <Paper ref={componentRef2_2} sx={paperStyle2}></Paper></Grid>
+            <Grid item  >  <Paper ref={componentRef2_3} sx={paperStyle2}></Paper></Grid>
+            <Grid item  >    <Paper ref={componentRef2_4} sx={paperStyle2}></Paper></Grid>
+            <Grid item> <Paper ref={componentRef2_5} sx={paperStyle2}></Paper></Grid>
+            <Grid item >  <Paper ref={componentRef3_1} sx={paperStyle2}> </Paper></Grid>
+            <Grid item >   <Paper ref={componentRef3_2} sx={paperStyle2}></Paper></Grid>
+            <Grid item > <Paper ref={componentRef3_3} sx={paperStyle2}></Paper></Grid>
+            <Grid item > <Paper ref={componentRef3_4} sx={paperStyle2}> </Paper></Grid>
+            <Grid item > <Paper ref={componentRef3_5} sx={paperStyle2}> </Paper></Grid>
+            </Grid>
 
 
-            <Typography sx={{ marginTop: 5, marginLeft: '20vh', fontSize: 20, color: 'grey' }}>Entre em</Typography>
-            <Typography sx={{ marginLeft: '20vh', marginBottom: 6, fontSize: 26 }}>Contato</Typography>
+            <Typography ref={componentRefText_5} sx={{ marginTop: 10, marginLeft: '20vh', fontSize: 20, color: 'grey', opacity:0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', }}>Entre em</Typography>
+            <Typography ref={componentRefText_6} sx={{ marginLeft: '20vh', marginBottom: 6, fontSize: 26 , opacity:0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',}}>Contato</Typography>
 
             <Box sx={{ display: 'flex', justifyContent: 'space-around', marginTop: 4, marginRight: 5 }}>
-                <a href='https://www.miess.com.br/sex-shop'> <Paper ref={componentRef4_1} sx={paperStyle3}>A é sério clica aqui e vc vai ver um site legal  </Paper></a>
-                <Paper ref={componentRef4_2} sx={paperStyle3_2}>
+            <Grid columnGap={5} spacing={2} rowGap={15} container sx={{ }} >
+                <Grid item><Paper ref={componentRef4_1} sx={paperStyle3}> </Paper></Grid> 
+                <Grid item>  <Paper ref={componentRef4_2} sx={paperStyle3_2}>
                     <img src={gifImage} alt="GIF" />
                 </Paper>
+                </Grid> 
+                </Grid>
             </Box>
         </>
     );
