@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client"
 import React from "react";
 import LoginPage from "./App";
 import DashboardPage from "./Dashboard";
+import './global.css'; 
 
 const router = createBrowserRouter ([
   {
