@@ -1,31 +1,50 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Grid, Box, Typography, Button, Slider, Paper, Divider } from '@mui/material';
-import Switch from '@mui/material/Switch';
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
-import * as THREE from 'three';
 import DrawerAppBar from './components/Navbar';
-import gifImage from './gif/gifhead.gif';
-import { ProgressionLine } from './components/ProgressionLine';
-import gifComp from './gif/giphy.gif'
-import img from './gif/texto1.png'
-import {FaReact, FaFigma, FaHtml5, FaCss3Alt} from 'react-icons/fa'
+import { FaReact, FaFigma, FaHtml5, FaCss3Alt } from 'react-icons/fa'
+import { TailPaper } from './components/TailPaper';
 
 const DashboardPage = () => {
 
-    // Primeiro são definidos os componentes que usarão 'useRef'
 
-    const componentRef1 = useRef(null);
+//  AQUI É FEITO O EFEITO PARA QUE A CAIXA DE TEXTO FIQUE RESPONSIVA
+
+    const [isPropTrue, setIsPropTrue] = useState(true);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const windowWidth = window.innerWidth;
+            if (windowWidth < 1250) {
+                setIsPropTrue(false);
+            } else {
+                setIsPropTrue(true);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+
+//  AQUI SÃO DEFINIDAS AS REFERÊNCIAS QUE SERÃO UTILIZADAS 
+//  PARA OS EFEITOS DE DETECTÇÃO DE 'VIEWPORT'
+
+
+    const componentPaper_1 = useRef(null);
+    const componentPaper_2 = useRef(null);
+    const componentPaper_3 = useRef(null);
+
     const componentRef2_1 = useRef(null);
     const componentRef2_2 = useRef(null);
     const componentRef2_3 = useRef(null);
     const componentRef2_4 = useRef(null);
     const componentRef2_5 = useRef(null);
-    // const componentRef3_1 = useRef(null);
-    // const componentRef3_2 = useRef(null);
-    // const componentRef3_3 = useRef(null);
-    // const componentRef3_4 = useRef(null);
-    // const componentRef3_5 = useRef(null);
+    const componentRef3_1 = useRef(null);
+    const componentRef3_2 = useRef(null);
+    const componentRef3_3 = useRef(null);
+
     const componentRef4_1 = useRef(null);
     const componentRef4_2 = useRef(null);
     const componentRefText_1 = useRef(null);
@@ -36,13 +55,12 @@ const DashboardPage = () => {
     const componentRefText_6 = useRef(null);
 
     // Agora, com useEffect, o three.js é utilizado para definir as transições em cada 'viewport'
-
     useEffect(() => {
-        
+
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 1, // Adjust this threshold value as needed
+            threshold: 0.5, // Adjust this threshold value as needed
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -54,24 +72,63 @@ const DashboardPage = () => {
 
                     // Update the marginLeft property of paperStyle1 based on the calculated distance
                     entry.target.style.marginLeft = `50px`;
+                }
+            });
+        }, observerOptions);
+
+        const observer_1 = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // Add the class with the animation to the component
+                    entry.target.classList.add('component');
+                    entry.target.style.opacity = 1;
+                } else {
+                    // Remove the class when the component is not intersecting
+                    entry.target.classList.remove('component');
+                }
+            });
+        }, observerOptions);
+
+        const observer_paper = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // Add the class with the animation to the component
+                    entry.target.style.left = `10rem`;
+                    entry.target.style.opacity = 1;
 
                 }
+            });
+        }, observerOptions);
 
+
+        const observer_paper_meio = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // Add the class with the animation to the component
+                    entry.target.style.left = `-35rem`;
+                    entry.target.style.opacity = 1;
+
+                }
             });
         }, observerOptions);
 
         // Observe each component's ref
-        observer.observe(componentRef1.current);
         observer.observe(componentRef2_1.current);
         observer.observe(componentRef2_2.current);
         observer.observe(componentRef2_3.current);
         observer.observe(componentRef2_4.current);
         observer.observe(componentRef2_5.current);
-        // observer.observe(componentRef3_1.current);
-        // observer.observe(componentRef3_2.current);
-        // observer.observe(componentRef3_3.current);
+
+        observer_1.observe(componentRef3_1.current);
+        observer_1.observe(componentRef3_2.current);
+        observer_1.observe(componentRef3_3.current);
         // observer.observe(componentRef3_4.current);
         // observer.observe(componentRef3_5.current);
+
+        observer_paper.observe(componentPaper_1.current);
+        observer_paper_meio.observe(componentPaper_2.current);
+        observer_paper.observe(componentPaper_3.current);
+
         observer.observe(componentRef4_1.current);
         observer.observe(componentRef4_2.current);
         observer.observe(componentRefText_1.current);
@@ -84,40 +141,83 @@ const DashboardPage = () => {
         // Clean up the observer when component is unmounted or ref changes
         return () => {
             observer.disconnect();
+            observer_1.disconnect();
+            observer_paper.disconnect();
+            observer_paper_meio.disconnect();
         };
     }, []);
 
     // As seguintes constantes definem o estilo de alguns componentes
 
-    const paperStyle1 = {
-        backgroundColor: 'transparent', height: '60vh', width: '60vh', display: 'flex', justifyContent: 'center', paddingTop: 2,
-        opacity: 0, // Set initial opacity to 0
-        transition: 'opacity 0.5s ease-in',
-        boxShadow: 0,
 
+    const tailPaperStyle = {
+        transition: 'left 0.5s ease-in, opacity 0.5s ease-in',
+        '@media (min-width: 1250px)': {
+            transform: 'rotate(0.5turn)',
+        },
+        '@media (max-width: 1250px)': {
+            left: '10rem !important',
+        },
     }
 
     const paperStyle2 = {
-        // backgroundColor: '#1e1e5d',
         backgroundColor: 'white',
-        
         height: '10vh',
-        width: '15vh',
-        // '@media (max-width: 400px)': {
-        //     width:'20vh', height:'15vh', 
-        //   },
+        width: '10vh',
         display: 'flex',
-        marginTop:-20,
+        marginTop: -20,
         borderRadius: 40,
         justifyContent: 'center',
-paddingTop:1,
+        paddingTop: 1.5,
         opacity: 0, // Set initial opacity to 0
         transition: 'opacity 0.5s ease-in, margin-left 0.5s ease-in', // Add transition for smooth fading effect
+    }
+
+    const paperStyleProgress_1 = {
+        backgroundColor: 'white',
+        height: '10vh',
+        width: '10vh',
+        '@media (max-width: 700px)': {
+            width: '10vh', height: '10vh',
+        },
+        marginTop: 35,
+        borderRadius: 40,
+        paddingTop: 1.5,
+        opacity: 0,
+        transition: 'opacity 1s ease-in',
+    }
+
+    const paperStyleProgress_2 = {
+        backgroundColor: 'white',
+        height: '10vh',
+        width: '10vh',
+        '@media (max-width: 700px)': {
+            width: '10vh', height: '10vh',
+        },
+        marginTop: 30,
+        borderRadius: 40,
+        paddingTop: 1.5,
+        opacity: 0,
+        transition: 'opacity 1s ease-in',
 
     }
 
+    const paperStyleProgress_3 = {
+        backgroundColor: 'white',
+        height: '10vh',
+        width: '10vh',
+        '@media (max-width: 700px)': {
+            width: '10vh', height: '10vh',
+        },
+        marginTop: 30,
+        borderRadius: 40,
+        paddingTop: 1.5,
+        opacity: 0,
+        transition: 'opacity 1s ease-in',
+    }
+
     const paperStyle3 = {
-        backgroundColor: '#92a5fd', height: '65vh', width: '50vh', display: 'flex', justifyContent: 'center', paddingTop: 5,
+        backgroundColor: '#966BB9', height: '65vh', width: '40vh', display: 'flex', justifyContent: 'center', paddingTop: 5,
         opacity: 0, // Set initial opacity to 0
         transition: 'opacity 0.5s ease-in', marginBottom: 5,
 
@@ -126,112 +226,154 @@ paddingTop:1,
         backgroundColor: 'transparent', display: 'flex', justifyContent: 'center', paddingTop: 5, boxShadow: 0,
         opacity: 0, // Set initial opacity to 0
         transition: 'opacity 0.5s ease-in', marginBottom: 5,
-
+        width: '10rem'
     }
 
     return (
         <>
-        
+
             <DrawerAppBar />
 
             <Grid container sx={{ display: 'flex', flexDirection: 'row' }}>
 
                 <Grid item>
+
                     <Grid ref={componentRefText_1} sx={{ display: 'flex', justifyContent: 'row', opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', }}>
                         <Typography sx={{
-                            fontSize: 26,
+                            fontSize: 40,
                             color: 'white',
+                            '@media (max-width: 420px)': {
+                                fontSize: 30,
+                            },
                         }}>Olá, eu sou o
                         </Typography>
 
-                        <Typography sx={{ color: '#9143D1', fontSize: 26, marginLeft: 1.5, }}>
+                        <Typography sx={{
+                            color: '#9143D1', fontSize: 40, marginLeft: 1.5,
+                            '@media (max-width: 420px)': {
+                                fontSize: 30,
+                            },
+                        }}>
                             Lucas
                         </Typography>
                     </Grid>
 
                     <Typography ref={componentRefText_2} sx={{
-                        marginBottom: 2, fontSize: 20,
-                        // color: '#587ffc', 
+                        marginBottom: 2, fontSize: 30,
                         color: 'white',
-                        opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',
+                        opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', position: 'absolute'
                     }}>Texto 2</Typography>
 
                 </Grid>
+            </Grid>
 
-                <Grid item sx={{ display: 'flex', justifyContent: 'center', marginTop: '5vh' }}>
-                    <Paper ref={componentRef1} sx={paperStyle1}>
-                        <img src={gifComp} alt="GIF" />
-                    </Paper>
+            <Grid>
+                <Divider sx={{ marginTop: 100 }} />
+
+                <Typography ref={componentRefText_3} sx={{
+
+                    marginLeft: '20vh',
+                    color: 'white',
+                    fontSize: 36, opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', position: 'absolute',
+                    '@media (max-width: 600px)': {
+                        fontSize: 30
+                    },
+                }}>Teste para texto com three.js</Typography>
+                <Typography ref={componentRefText_4} sx={{
+                    marginLeft: '20vh', fontSize: 30, top: '65rem',
+                    color: 'white',
+                    opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', position: 'absolute',
+                    '@media (max-width: 600px)': {
+                        fontSize: 26
+                    },
+                }}>Teste teste teste</Typography>
+            </Grid>
+
+
+
+
+            <Grid sx={{
+                display: 'flex', justifyContent: 'center',
+                '@media (max-width: 1250px)': {
+                    marginRight: '50%'
+                },
+                '@media (max-width: 900px)': {
+                    marginRight: '80%'
+                },
+            }}>
+
+                {/* CADA PAPER É UM CÍRCULO */}
+                {/* CADA TAILPAPER É UMA CAIXA DE TEXTO */}
+
+                <Grid sx={{ position: 'absolute' }}>
+
+                    <Paper sx={paperStyleProgress_1} ref={componentRef3_1} />
+
+                    <TailPaper ref={componentPaper_1} bottom='31rem' left='1rem' />
+
+                    <Paper sx={paperStyleProgress_2} ref={componentRef3_2} />
+
+                    <TailPaper ref={componentPaper_2} isPropTrue={isPropTrue} bottom='10rem' left='-30rem' sx={tailPaperStyle} />
+
+                    <Paper sx={paperStyleProgress_3} ref={componentRef3_3} />
+
+                    <TailPaper bottom='-11rem' ref={componentPaper_3} sx={{}} left='1rem' />
+
                 </Grid>
+
+                {/* O Divider abaixo é a linha branca do meio */}
+
+                <Divider variant='middle' sx={{ borderColor: 'white', borderWidth: 2, transform: 'rotate(0.25turn)', width: '60rem', marginTop: 80 }} />
+
             </Grid>
 
-            <Divider sx={{ marginTop: 5 }} />
+            {/* COMPETÊNCIAS (ÍCONES) */}
 
-            <Typography ref={componentRefText_3} sx={{
-                marginTop: 8, marginLeft: '20vh',
-                color: 'white',
-                fontSize: 26, opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',
-            }}>Teste para texto com three.js</Typography>
-            <Typography ref={componentRefText_4} sx={{
-                marginBottom: 2, marginLeft: '20vh', fontSize: 20,
-                color: 'white',
-                opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',
-            }}>ele é o amor da vida dela </Typography>
-
-            <Divider variant={'middle'} />
-
-            <Grid columnGap={5} spacing={2} rowGap={15} container sx={{ display: 'flex', justifyContent: 'center', }} >
-            <img src={img} alt="GIF" />
+            <Grid columnGap={5} spacing={2} rowGap={15} container sx={{ display: 'flex', justifyContent: 'center', marginTop: '50rem', marginLeft: -5 }} >
                 <Grid item ><Paper ref={componentRef2_1} sx={paperStyle2}>
-                    <FaReact  size={70}/>
-                    </Paper></Grid>
+                    <FaReact size={70} />
+                </Paper></Grid>
                 <Grid item>   <Paper ref={componentRef2_2} sx={paperStyle2}>
-                    <FaCss3Alt size={70}/>
-                    </Paper></Grid>
+                    <FaCss3Alt size={70} />
+                </Paper></Grid>
                 <Grid item  >  <Paper ref={componentRef2_3} sx={paperStyle2}>
-                    <FaHtml5 size={70}/>
-                    </Paper></Grid>
+                    <FaHtml5 size={70} />
+                </Paper></Grid>
                 <Grid item  >    <Paper ref={componentRef2_4} sx={paperStyle2}>
-                    <FaFigma size={70}/>
-                    </Paper></Grid>
+                    <FaFigma size={70} />
+                </Paper></Grid>
                 <Grid item> <Paper ref={componentRef2_5} sx={paperStyle2}>
-                   <Typography sx={{fontWeight:800, fontSize:30, marginTop:1, fontFamily:'sans-serif'}}>JS</Typography>
-                    </Paper></Grid>
-                {/* <Grid item >  <Paper ref={componentRef3_1} sx={paperStyle2}> </Paper></Grid>
-                <Grid item >   <Paper ref={componentRef3_2} sx={paperStyle2}></Paper></Grid>
-                <Grid item > <Paper ref={componentRef3_3} sx={paperStyle2}></Paper></Grid>
-                <Grid item > <Paper ref={componentRef3_4} sx={paperStyle2}> </Paper></Grid>
-                <Grid item > <Paper ref={componentRef3_5} sx={paperStyle2}> </Paper></Grid> */}
+                    <Typography sx={{ fontWeight: 800, fontSize: 30, marginTop: 1, fontFamily: 'sans-serif' }}>JS</Typography>
+                </Paper></Grid>
 
             </Grid>
+
+            {/* ENTRE EM CONTATO */}
 
             <Divider sx={{ marginTop: 10, }} />
 
             <Typography ref={componentRefText_5} sx={{
-                 marginLeft: '20vh',
-                // color: '#494d5f',
-              marginTop:-10,
+                marginLeft: '20vh',
+                marginTop: -10,
                 color: 'white',
-                fontSize: 20, opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',
+                fontSize: 30, opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',
             }}>Entre em</Typography>
             <Typography ref={componentRefText_6} sx={{
-                marginLeft: '20vh', marginBottom: 3, fontSize: 26,
-                // color: '#587ffc', 
+                marginLeft: '20vh', marginBottom: 3, fontSize: 36,
                 color: 'white',
                 opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',
             }}>Contato</Typography>
 
-            <Divider variant={'middle'} />
-
             <Box sx={{ display: 'flex', justifyContent: 'space-around', marginRight: 5 }}>
                 <Grid columnGap={5} spacing={2} rowGap={15} container sx={{}} >
                     <Grid item><Paper ref={componentRef4_1} sx={paperStyle3}> </Paper></Grid>
+
                     <Grid item>  <Paper ref={componentRef4_2} sx={paperStyle3_2}>
-                        <img src={gifImage} alt="GIF" />
                     </Paper>
                     </Grid>
                 </Grid>
             </Box>
+
         </>
     );
 };

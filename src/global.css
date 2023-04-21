@@ -1,5 +1,64 @@
 /* global.css */
 body {
-    background-color: #091235; /* substitua pela cor de fundo desejada */
+    background-color: #091235; 
   }
   
+  .container {
+    background-image: url(background.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  
+  /* Define the animation for growing and shrinking */
+@keyframes growAndShrink {
+  0% {
+    transform: scale(1); /* Initial size */
+  }
+  50% {
+    transform: scale(1.2); /* Scaled up size */
+  }
+  100% {
+    transform: scale(1); /* Shrunk back to original size */
+  }
+}
+
+/* Apply the animation to the component */
+.component {
+  animation-name: growAndShrink;
+  animation-duration: 1s; /* Duration of the animation */
+  animation-iteration-count: 1; /* Number of times the animation loops */
+}
+.speaking-box-tail {
+  position: absolute;
+  left: -11px;
+  top: 10px;
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 12px solid #ffffff;
+}
+
+.speaking-box-tail {
+  position: absolute;
+  left: -11px;
+  top: 10px;
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 12px solid #ffffff;
+}
+
+.speaking-box-tail2 {
+  position: absolute;
+  left: -11px;
+  top: 200px;
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 12px solid #ffffff;
+}
+
+
