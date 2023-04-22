@@ -31,10 +31,13 @@ const DashboardPage = () => {
 
     const componentRef4_1 = useRef(null);
     const componentRef4_2 = useRef(null);
+
     const componentRefText_1 = useRef(null);
     const componentRefText_2 = useRef(null);
+
     const componentRefText_3 = useRef(null);
     const componentRefText_4 = useRef(null);
+
     const componentRefText_5 = useRef(null);
     const componentRefText_6 = useRef(null);
 
@@ -59,6 +62,33 @@ const DashboardPage = () => {
                 }
             });
         }, observerOptions);
+
+        const observer_2 = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // Component is in viewport, trigger animations or actions here
+                    // Update opacity to 1 to fade in the component
+                    entry.target.style.opacity = 1;
+
+                    // Update the marginLeft property of paperStyle1 based on the calculated distance
+                    entry.target.style.marginLeft = `10px`;
+                }
+            });
+        }, observerOptions);
+
+        const observer_final = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // Component is in viewport, trigger animations or actions here
+                    // Update opacity to 1 to fade in the component
+                    entry.target.style.opacity = 1;
+
+                    // Update the marginLeft property of paperStyle1 based on the calculated distance
+                    entry.target.style.marginLeft = `10vw`;
+                }
+            });
+        }, observerOptions);
+
 
         const observer_1 = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -118,21 +148,25 @@ const DashboardPage = () => {
             observer_paper_big.observe(componentPaper_2.current);
         }
 
-
-
-        observer.observe(componentRef4_1.current);
-        observer.observe(componentRef4_2.current);
+        observer_2.observe(componentRef4_1.current);
+        observer_2.observe(componentRef4_2.current);
         observer.observe(componentRefText_1.current);
         observer.observe(componentRefText_2.current);
         observer.observe(componentRefText_3.current);
         observer.observe(componentRefText_4.current);
-        observer.observe(componentRefText_5.current);
-        observer.observe(componentRefText_6.current);
+
+        observer_final.observe(componentRefText_5.current);
+        observer_final.observe(componentRefText_6.current);
 
         // Clean up the observer when component is unmounted or ref changes
         return () => {
             observer.disconnect();
             observer_1.disconnect();
+            observer_2.disconnect();
+            observer_final.disconnect();
+
+
+
             observer_paper.disconnect();
             observer_paper_big.disconnect();
         };
@@ -187,8 +221,8 @@ const DashboardPage = () => {
 
     const paperStyleProgress_1 = {
         backgroundColor: 'white',
-        border:5,
-        borderColor:'#19224B',
+        border: 5,
+        borderColor: '#19224B',
         height: '6rem',
         width: '6rem',
         '@media (max-width: 700px)': {
@@ -203,8 +237,8 @@ const DashboardPage = () => {
 
     const paperStyleProgress_2 = {
         backgroundColor: 'white',
-        border:5,
-        borderColor:'#19224B',
+        border: 5,
+        borderColor: '#19224B',
         height: '6rem',
         width: '6rem',
         '@media (max-width: 700px)': {
@@ -220,8 +254,8 @@ const DashboardPage = () => {
 
     const paperStyleProgress_3 = {
         backgroundColor: 'white',
-        border:5,
-        borderColor:'#19224B',
+        border: 5,
+        borderColor: '#19224B',
         height: '6rem',
         width: '6rem',
         '@media (max-width: 700px)': {
@@ -235,18 +269,18 @@ const DashboardPage = () => {
     }
 
     const paperStyle3 = {
-        backgroundColor: '#19224B', height: '39rem', width: '24rem',
+        backgroundColor: '#19224B', height: '32rem', width: '25rem', borderRadius: 5,
         '@media (max-width: 700px)': {
             width: '60vw',
         },
-        display: 'flex', justifyContent: 'center', paddingTop: 5,
+        display: 'flex', justifyContent: 'flex-start', flexDirection: 'column', paddingLeft: 3, paddingTop: 3,
         opacity: 0, // Set initial opacity to 0
-        transition: 'opacity 0.5s ease-in', marginBottom: 5,
+        transition: 'opacity 0.5s ease-in', marginBottom: 5, marginTop: 5
     }
     const paperStyle3_2 = {
         backgroundColor: 'transparent', display: 'flex', justifyContent: 'center', paddingTop: 5, boxShadow: 0,
         opacity: 0, // Set initial opacity to 0
-        transition: 'opacity 0.5s ease-in', marginBottom: 5,
+        transition: 'opacity 0.5s ease-in, margin-left 0.5s ease-in', marginBottom: 5, marginLeft: 20,
         width: '10rem'
     }
 
@@ -281,11 +315,11 @@ const DashboardPage = () => {
 
                     <Typography ref={componentRefText_2} sx={{
                         marginBottom: 2, fontSize: 30,
-                        color: '#BEBEBE', 
+                        color: '#BEBEBE',
                         opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', position: 'absolute'
                     }}>Estou cursando o 2º ano de Sistemas de Informação no Inteli.</Typography>
                 </Grid>
-                <img src={gifLoad} style={{position:'absolute', top:'15rem', left:0, width:'50vw'}}></img>
+                <img src={gifLoad} style={{ position: 'absolute', top: '15rem', left: 0, width: '50vw' }}></img>
             </Grid>
 
             <Grid>
@@ -331,14 +365,17 @@ const DashboardPage = () => {
                     <Paper sx={paperStyleProgress_1} ref={componentRef3_1} />
 
                     <TailPaper ref={componentPaper_1} bottom='31rem' left='1rem' >
-                        <Typography sx={{ color: 'white', fontWeight: 800, fontSize: 22,
-                       '@media (max-width: 400px)': {
-                        fontSize: 14,
-                      }, }}>Sistemas de Informação</Typography>
-                        <Typography sx={{ color: '#BEBEBE', fontWeight: 800, fontSize: 16,     '@media (max-width: 400px)': {
-                            fontSize: 10,}
-                            }}>Inteli</Typography>
-                        
+                        <Typography sx={{
+                            color: 'white', fontWeight: 800, fontSize: 22,
+                            '@media (max-width: 400px)': {
+                                fontSize: 14,
+                            },
+                        }}>Sistemas de Informação</Typography>
+                        <Typography sx={{
+                            color: '#BEBEBE', fontWeight: 800, fontSize: 16, '@media (max-width: 400px)': {
+                                fontSize: 10,
+                            }
+                        }}>Inteli</Typography>
                         <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 14, marginTop: 1 }}>Métodos de trabalho como Scrum, Lean e Kanban</Typography>
                         <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 14, marginTop: 1 }}>Programação em Javascript, HTML e CSS</Typography>
                         <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 14, marginTop: 1 }}>Introdução a Python, C++ e SQLite</Typography>
@@ -352,16 +389,19 @@ const DashboardPage = () => {
                     <Paper sx={paperStyleProgress_2} ref={componentRef3_2} />
                     {window.innerWidth < 1250 && (
                         <TailPaper ref={componentPaper_2_small} bottom='10rem' left='1rem' >
-                            <Typography sx={{ color: 'white', fontWeight: 800, fontSize: 22,
-                        '@media (max-width: 400px)': {
-                            fontSize: 14,
-                          },
-                      
-                          }}>Desenvolvimento em React</Typography>
-                            <Typography sx={{ color: '#BEBEBE', fontWeight: 800, fontSize: 16, 
-                            '@media (max-width: 400px)': {
-                                fontSize: 10,}
-                                 }}>Estágio de Férias no BTG </Typography>
+                            <Typography sx={{
+                                color: 'white', fontWeight: 800, fontSize: 22,
+                                '@media (max-width: 400px)': {
+                                    fontSize: 14,
+                                },
+
+                            }}>Desenvolvimento em React</Typography>
+                            <Typography sx={{
+                                color: '#BEBEBE', fontWeight: 800, fontSize: 16,
+                                '@media (max-width: 400px)': {
+                                    fontSize: 10,
+                                }
+                            }}>Estágio de Férias no BTG </Typography>
                             <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Microfrontend</Typography>
                             <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Git flow</Typography>
                             <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>React com JS e com TS</Typography>
@@ -382,14 +422,18 @@ const DashboardPage = () => {
                     <Paper sx={paperStyleProgress_3} ref={componentRef3_3} />
 
                     <TailPaper bottom='-11rem' ref={componentPaper_3} left='1rem' >
-                        <Typography sx={{ color: 'white', fontWeight: 800, fontSize: 22,
-                    '@media (max-width: 400px)': {
-                        fontSize: 14,
-                      }, }}>Conhecimentos gerais</Typography>
-                        <Typography sx={{ color: '#BEBEBE', fontWeight: 800, fontSize: 16,
-                    '@media (max-width: 400px)': {
-                        fontSize: 10,
-                      }, }}>Cursos online / presenciais </Typography>
+                        <Typography sx={{
+                            color: 'white', fontWeight: 800, fontSize: 22,
+                            '@media (max-width: 400px)': {
+                                fontSize: 14,
+                            },
+                        }}>Conhecimentos gerais</Typography>
+                        <Typography sx={{
+                            color: '#BEBEBE', fontWeight: 800, fontSize: 16,
+                            '@media (max-width: 400px)': {
+                                fontSize: 10,
+                            },
+                        }}>Cursos online / presenciais </Typography>
                         <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Voxy: Inglês 'High Intermediate'</Typography>
                         <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Design Digital: Figma e prototipagem em geral</Typography>
                         <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Udemy e Codeacademy: Machine Learning e Desenvolvimento Frontend</Typography>
@@ -405,7 +449,7 @@ const DashboardPage = () => {
 
             {/* COMPETÊNCIAS (ÍCONES) */}
 
-            <Grid columnGap={5} spacing={2} rowGap={15} container sx={{ display: 'flex', justifyContent: 'center', marginTop: '50rem', marginLeft: -5 }} >
+            <Grid columnGap={5} spacing={2} rowGap={15} container sx={{ display: 'flex', justifyContent: 'center', marginTop: '53rem', marginLeft: -5 }} >
                 <Grid item ><Paper ref={componentRef2_1} sx={paperStyle2}>
                     <FaReact size={70} />
                 </Paper></Grid>
@@ -426,33 +470,81 @@ const DashboardPage = () => {
 
             {/* ENTRE EM CONTATO */}
 
-            <Divider sx={{ marginTop: 5, }} />
-
             <Typography ref={componentRefText_5} sx={{
-                marginLeft: '20vh',
-       
+                marginLeft: '20rem',
+
                 color: '#BEBEBE',
                 fontSize: 30, opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',
             }}>Entre em</Typography>
             <Typography ref={componentRefText_6} sx={{
-                marginLeft: '20vh', marginBottom: 3, fontSize: 36,
+                marginLeft: '20rem', marginBottom: 3, fontSize: 36,
                 color: 'white',
                 opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',
             }}>Contato</Typography>
 
-            <Box sx={{ display: 'flex', justifyContent: 'space-around', marginRight: 5 }}>
-        
-                    <Grid ><Paper ref={componentRef4_1} sx={paperStyle3}> </Paper></Grid>
+            <Box sx={{ display: 'flex', justifyContent: 'center', marginRight: 5 }}>
 
-                    <Grid >  <Paper ref={componentRef4_2} sx={paperStyle3_2}>
-                <img src={gifLoad2} style={{
-                    //  '@media (min-width: 1250px)': {marginLeft:'-100rem',
-                    //   },  
-                      }}></img>
+                <Grid><Paper ref={componentRef4_1} sx={paperStyle3}>
 
-                    </Paper>
-                    </Grid>
-           
+
+                    <Typography sx={{
+                        color: 'white', fontWeight: 800, fontSize: 22,
+                        '@media (max-width: 400px)': {
+                            fontSize: 14,
+                        },
+                    }}>Linkedin</Typography>
+                    <Typography sx={{
+                        color: '#BEBEBE', fontWeight: 800, fontSize: 16, marginTop: 2, '@media (max-width: 400px)': {
+                            fontSize: 10,
+                        }
+                    }}>https://www.linkedin.com/in/lucas-conti-pereira-3410b1233/</Typography>
+
+                    <Typography sx={{
+                        color: 'white', fontWeight: 800, fontSize: 22, marginTop: 5,
+                        '@media (max-width: 400px)': {
+                            fontSize: 14,
+                        },
+                    }}>Email</Typography>
+                    <Typography sx={{
+                        color: '#BEBEBE', fontWeight: 800, fontSize: 20, marginTop: 2, '@media (max-width: 400px)': {
+                            fontSize: 10,
+                        }
+                    }}>lucas.pereira@sou.inteli.edu.br</Typography>
+
+                    <Typography sx={{
+                        color: 'white', fontWeight: 800, fontSize: 22, marginTop: 5,
+                        '@media (max-width: 400px)': {
+                            fontSize: 14,
+                        },
+                    }}>Celular</Typography>
+                    <Typography sx={{
+                        color: '#BEBEBE', fontWeight: 800, fontSize: 20, marginTop: 2, '@media (max-width: 400px)': {
+                            fontSize: 10,
+                        }
+                    }}>+55 11 97996-8324</Typography>
+
+                    <Typography sx={{
+                        color: 'white', fontWeight: 800, fontSize: 22, marginTop: 5,
+                        '@media (max-width: 400px)': {
+                            fontSize: 14,
+                        },
+                    }}>GitHub</Typography>
+                    <Typography sx={{
+                        color: '#BEBEBE', fontWeight: 800, fontSize: 20, marginTop: 2, '@media (max-width: 400px)': {
+                            fontSize: 10,
+                        }
+                    }}>lucasconti888</Typography>
+
+
+                </Paper></Grid>
+
+                <Grid >  <Paper ref={componentRef4_2} sx={paperStyle3_2}>
+                    <img src={gifLoad2} style={{
+                    }}></img>
+
+                </Paper>
+                </Grid>
+
             </Box>
 
         </>
