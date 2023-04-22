@@ -1,6 +1,6 @@
 /* global.css */
 body {
-    background-color: linear-gradient(180deg, rgba(9,18,53,1) 19%, rgba(0,0,0,1) 86%);
+    background-color: linear-gradient(180deg, rgba(9,18,53,1) 1%, rgba(0,0,0,1) 86%);
   }
   
   .container {

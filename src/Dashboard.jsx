@@ -187,6 +187,8 @@ const DashboardPage = () => {
 
     const paperStyleProgress_1 = {
         backgroundColor: 'white',
+        border:5,
+        borderColor:'#19224B',
         height: '6rem',
         width: '6rem',
         '@media (max-width: 700px)': {
@@ -201,6 +203,8 @@ const DashboardPage = () => {
 
     const paperStyleProgress_2 = {
         backgroundColor: 'white',
+        border:5,
+        borderColor:'#19224B',
         height: '6rem',
         width: '6rem',
         '@media (max-width: 700px)': {
@@ -216,6 +220,8 @@ const DashboardPage = () => {
 
     const paperStyleProgress_3 = {
         backgroundColor: 'white',
+        border:5,
+        borderColor:'#19224B',
         height: '6rem',
         width: '6rem',
         '@media (max-width: 700px)': {
@@ -275,9 +281,9 @@ const DashboardPage = () => {
 
                     <Typography ref={componentRefText_2} sx={{
                         marginBottom: 2, fontSize: 30,
-                        color: 'white', 
+                        color: '#BEBEBE', 
                         opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', position: 'absolute'
-                    }}>Estou cursando o 2º ano de Sistemas da Informação no Inteli.</Typography>
+                    }}>Estou cursando o 2º ano de Sistemas de Informação no Inteli.</Typography>
                 </Grid>
                 <img src={gifLoad} style={{position:'absolute', top:'15rem', left:0, width:'50vw'}}></img>
             </Grid>
@@ -296,7 +302,7 @@ const DashboardPage = () => {
                 }}>Sobre mim</Typography>
                 <Typography ref={componentRefText_4} sx={{
                     marginLeft: '20vh', fontSize: 30, top: '65rem',
-                    color: 'white',
+                    color: '#BEBEBE',
                     opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', position: 'absolute',
                     '@media (max-width: 600px)': {
                         fontSize: 26
@@ -328,14 +334,16 @@ const DashboardPage = () => {
                         <Typography sx={{ color: 'white', fontWeight: 800, fontSize: 22,
                        '@media (max-width: 400px)': {
                         fontSize: 14,
-                      }, }}>Improved styling with css</Typography>
+                      }, }}>Sistemas de Informação</Typography>
                         <Typography sx={{ color: '#BEBEBE', fontWeight: 800, fontSize: 16,     '@media (max-width: 400px)': {
                             fontSize: 10,}
-                            }}>Codeacademy</Typography>
+                            }}>Inteli</Typography>
                         
-                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Codeacademy</Typography>
-                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
-                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
+                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 14, marginTop: 1 }}>Métodos de trabalho como Scrum, Lean e Kanban</Typography>
+                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 14, marginTop: 1 }}>Programação em Javascript, HTML e CSS</Typography>
+                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 14, marginTop: 1 }}>Introdução a Python, C++ e SQLite</Typography>
+                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 14, marginTop: 1 }}>Machine Learning e PLN com Python no Google Colab</Typography>
+
 
 
                     </TailPaper>
@@ -354,18 +362,18 @@ const DashboardPage = () => {
                             '@media (max-width: 400px)': {
                                 fontSize: 10,}
                                  }}>Estágio de Férias no BTG </Typography>
-                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Codeacademy</Typography>
-                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
-                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
+                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Microfrontend</Typography>
+                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Git flow</Typography>
+                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>React com JS e com TS</Typography>
                         </TailPaper>
                     )}
                     {window.innerWidth >= 1250 && (
                         <TailPaper ref={componentPaper_2} isPropTrue bottom='10rem' left='-30rem' >
                             <Typography sx={{ color: 'white', fontWeight: 800, fontSize: 22 }}>Desenvolvimento em React</Typography>
                             <Typography sx={{ color: '#BEBEBE', fontWeight: 800, fontSize: 16 }}>Estágio de Férias no BTG </Typography>
-                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Codeacademy</Typography>
-                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
-                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
+                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Microfrontend</Typography>
+                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Git flow</Typography>
+                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>React com JS e com TS</Typography>
                         </TailPaper>
 
                     )}
@@ -377,14 +385,14 @@ const DashboardPage = () => {
                         <Typography sx={{ color: 'white', fontWeight: 800, fontSize: 22,
                     '@media (max-width: 400px)': {
                         fontSize: 14,
-                      }, }}>Desenvolvimento em React</Typography>
+                      }, }}>Conhecimentos gerais</Typography>
                         <Typography sx={{ color: '#BEBEBE', fontWeight: 800, fontSize: 16,
                     '@media (max-width: 400px)': {
                         fontSize: 10,
-                      }, }}>Estágio de Férias no BTG </Typography>
-                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Codeacademy</Typography>
-                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
-                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
+                      }, }}>Cursos online / presenciais </Typography>
+                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Voxy: Inglês 'High Intermediate'</Typography>
+                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Design Digital: Figma e prototipagem em geral</Typography>
+                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Udemy e Codeacademy: Machine Learning e Desenvolvimento Frontend</Typography>
                     </TailPaper>
 
                 </Grid>
@@ -418,12 +426,12 @@ const DashboardPage = () => {
 
             {/* ENTRE EM CONTATO */}
 
-            <Divider sx={{ marginTop: 10, }} />
+            <Divider sx={{ marginTop: 5, }} />
 
             <Typography ref={componentRefText_5} sx={{
                 marginLeft: '20vh',
-                marginTop: -10,
-                color: 'white',
+       
+                color: '#BEBEBE',
                 fontSize: 30, opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',
             }}>Entre em</Typography>
             <Typography ref={componentRefText_6} sx={{
