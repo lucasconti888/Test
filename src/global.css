@@ -1,6 +1,6 @@
 /* global.css */
 body {
-    background-color: #091235; 
+    background-color: linear-gradient(180deg, rgba(9,18,53,1) 19%, rgba(0,0,0,1) 86%);
   }
   
   .container {
@@ -8,7 +8,15 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
   }
+
+  .container2 {
+    background-image: url(200w.gif);
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
   
+
+
   /* Define the animation for growing and shrinking */
 @keyframes growAndShrink {
   0% {

@@ -1,13 +1,13 @@
 import React, { forwardRef, useImperativeHandle, useState, useEffect } from 'react';
 import { Box, Paper } from '@mui/material';
 
-export const TailPaper = forwardRef(({ bottom, left, sx, children, isPropTrue }, ref) => {
+export const TailPaper = forwardRef(({ bottom, left, right, sx, children, isPropTrue }, ref) => {
   const [className, setClassName] = useState('speaking-box-tail'); // Initial className
 
   // Update className based on the value of the prop
   useEffect(() => {
     if (isPropTrue) {
-      setClassName('speaking-box-tail2'); // Replace 'new-class-name' with the desired className
+      setClassName('speaking-box-tail2');
     } else {
       setClassName('speaking-box-tail'); // Revert to original className
     }
@@ -26,6 +26,7 @@ export const TailPaper = forwardRef(({ bottom, left, sx, children, isPropTrue },
           opacity: 0,
           transition: 'left 0.5s ease-in, opacity 0.5s ease-in',
           bottom: bottom,
+          right:right,
           borderBottom:5,
           backgroundColor:'#19224B',
           borderColor:'white',

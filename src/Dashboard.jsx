@@ -3,6 +3,9 @@ import { Grid, Box, Typography, Button, Slider, Paper, Divider } from '@mui/mate
 import DrawerAppBar from './components/Navbar';
 import { FaReact, FaFigma, FaHtml5, FaCss3Alt } from 'react-icons/fa'
 import { TailPaper } from './components/TailPaper';
+import gifLoad from './loading.gif'
+import gifLoad2 from './flowers.gif'
+
 
 const DashboardPage = () => {
 
@@ -233,7 +236,6 @@ const DashboardPage = () => {
         display: 'flex', justifyContent: 'center', paddingTop: 5,
         opacity: 0, // Set initial opacity to 0
         transition: 'opacity 0.5s ease-in', marginBottom: 5,
-
     }
     const paperStyle3_2 = {
         backgroundColor: 'transparent', display: 'flex', justifyContent: 'center', paddingTop: 5, boxShadow: 0,
@@ -273,11 +275,11 @@ const DashboardPage = () => {
 
                     <Typography ref={componentRefText_2} sx={{
                         marginBottom: 2, fontSize: 30,
-                        color: 'white',
+                        color: 'white', 
                         opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', position: 'absolute'
-                    }}>Texto 2</Typography>
-
+                    }}>Estou cursando o 2º ano de Sistemas da Informação no Inteli.</Typography>
                 </Grid>
+                <img src={gifLoad} style={{position:'absolute', top:'15rem', left:0, width:'50vw'}}></img>
             </Grid>
 
             <Grid>
@@ -291,7 +293,7 @@ const DashboardPage = () => {
                     '@media (max-width: 600px)': {
                         fontSize: 30
                     },
-                }}>Teste para texto com three.js</Typography>
+                }}>Sobre mim</Typography>
                 <Typography ref={componentRefText_4} sx={{
                     marginLeft: '20vh', fontSize: 30, top: '65rem',
                     color: 'white',
@@ -299,7 +301,7 @@ const DashboardPage = () => {
                     '@media (max-width: 600px)': {
                         fontSize: 26
                     },
-                }}>Teste teste teste</Typography>
+                }}>Algumas experiências e competências que adquiri ao longo do tempo</Typography>
             </Grid>
 
 
@@ -431,13 +433,18 @@ const DashboardPage = () => {
             }}>Contato</Typography>
 
             <Box sx={{ display: 'flex', justifyContent: 'space-around', marginRight: 5 }}>
-                <Grid columnGap={5} spacing={2} rowGap={15} container sx={{}} >
-                    <Grid item><Paper ref={componentRef4_1} sx={paperStyle3}> </Paper></Grid>
+        
+                    <Grid ><Paper ref={componentRef4_1} sx={paperStyle3}> </Paper></Grid>
 
-                    <Grid item>  <Paper ref={componentRef4_2} sx={paperStyle3_2}>
+                    <Grid >  <Paper ref={componentRef4_2} sx={paperStyle3_2}>
+                <img src={gifLoad2} style={{
+                    //  '@media (min-width: 1250px)': {marginLeft:'-100rem',
+                    //   },  
+                      }}></img>
+
                     </Paper>
                     </Grid>
-                </Grid>
+           
             </Box>
 
         </>
