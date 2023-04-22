@@ -7,33 +7,14 @@ import { TailPaper } from './components/TailPaper';
 const DashboardPage = () => {
 
 
-//  AQUI É FEITO O EFEITO PARA QUE A CAIXA DE TEXTO FIQUE RESPONSIVA
-
-    const [isPropTrue, setIsPropTrue] = useState(true);
-
-    useEffect(() => {
-        const handleResize = () => {
-            const windowWidth = window.innerWidth;
-            if (windowWidth < 1250) {
-                setIsPropTrue(false);
-            } else {
-                setIsPropTrue(true);
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
 
 
-//  AQUI SÃO DEFINIDAS AS REFERÊNCIAS QUE SERÃO UTILIZADAS 
-//  PARA OS EFEITOS DE DETECTÇÃO DE 'VIEWPORT'
-
-
+    //  AQUI SÃO DEFINIDAS AS REFERÊNCIAS QUE SERÃO UTILIZADAS 
+    //  PARA OS EFEITOS DE DETECTÇÃO DE 'VIEWPORT'
     const componentPaper_1 = useRef(null);
     const componentPaper_2 = useRef(null);
+    const componentPaper_2_small = useRef(null);
+
     const componentPaper_3 = useRef(null);
 
     const componentRef2_1 = useRef(null);
@@ -100,8 +81,7 @@ const DashboardPage = () => {
             });
         }, observerOptions);
 
-
-        const observer_paper_meio = new IntersectionObserver((entries) => {
+        const observer_paper_big = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     // Add the class with the animation to the component
@@ -126,8 +106,16 @@ const DashboardPage = () => {
         // observer.observe(componentRef3_5.current);
 
         observer_paper.observe(componentPaper_1.current);
-        observer_paper_meio.observe(componentPaper_2.current);
         observer_paper.observe(componentPaper_3.current);
+
+        // Observe the ref only if the window.innerWidth is less than 1250
+        if (window.innerWidth < 1250 && componentPaper_2_small.current) {
+            observer_paper.observe(componentPaper_2_small.current);
+        } else if (window.innerWidth >= 1250 && componentPaper_2.current) {
+            observer_paper_big.observe(componentPaper_2.current);
+        }
+
+
 
         observer.observe(componentRef4_1.current);
         observer.observe(componentRef4_2.current);
@@ -143,27 +131,48 @@ const DashboardPage = () => {
             observer.disconnect();
             observer_1.disconnect();
             observer_paper.disconnect();
-            observer_paper_meio.disconnect();
+            observer_paper_big.disconnect();
         };
     }, []);
+
+
+    //  AQUI É FEITO O EFEITO PARA QUE A CAIXA DE TEXTO FIQUE RESPONSIVA
+
+    useEffect(() => {
+        const handleResize = () => {
+            const windowWidth = window.innerWidth;
+            if (windowWidth >= 1250) {
+                window.location.reload(); // Reload the page
+            }
+            else (windowWidth < 1250)
+            window.location.reload(); // Reload the page
+
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
 
     // As seguintes constantes definem o estilo de alguns componentes
 
 
     const tailPaperStyle = {
         transition: 'left 0.5s ease-in, opacity 0.5s ease-in',
-        '@media (min-width: 1250px)': {
-            transform: 'rotate(0.5turn)',
-        },
-        '@media (max-width: 1250px)': {
-            left: '10rem !important',
-        },
+        // '@media (min-width: 1250px)': {
+        //     transform: 'rotate(0.5turn)',
+        // },
+        // '@media (max-width: 1250px)': {
+        //     left: '10rem !important',
+        // },
     }
 
     const paperStyle2 = {
         backgroundColor: 'white',
-        height: '10vh',
-        width: '10vh',
+        height: '6rem',
+        width: '6rem',
         display: 'flex',
         marginTop: -20,
         borderRadius: 40,
@@ -175,10 +184,10 @@ const DashboardPage = () => {
 
     const paperStyleProgress_1 = {
         backgroundColor: 'white',
-        height: '10vh',
-        width: '10vh',
+        height: '6rem',
+        width: '6rem',
         '@media (max-width: 700px)': {
-            width: '10vh', height: '10vh',
+            width: '6rem', height: '6rem',
         },
         marginTop: 35,
         borderRadius: 40,
@@ -189,10 +198,10 @@ const DashboardPage = () => {
 
     const paperStyleProgress_2 = {
         backgroundColor: 'white',
-        height: '10vh',
-        width: '10vh',
+        height: '6rem',
+        width: '6rem',
         '@media (max-width: 700px)': {
-            width: '10vh', height: '10vh',
+            width: '6rem', height: '6rem',
         },
         marginTop: 30,
         borderRadius: 40,
@@ -204,10 +213,10 @@ const DashboardPage = () => {
 
     const paperStyleProgress_3 = {
         backgroundColor: 'white',
-        height: '10vh',
-        width: '10vh',
+        height: '6rem',
+        width: '6rem',
         '@media (max-width: 700px)': {
-            width: '10vh', height: '10vh',
+            width: '6rem', height: '6rem',
         },
         marginTop: 30,
         borderRadius: 40,
@@ -217,7 +226,11 @@ const DashboardPage = () => {
     }
 
     const paperStyle3 = {
-        backgroundColor: '#966BB9', height: '65vh', width: '40vh', display: 'flex', justifyContent: 'center', paddingTop: 5,
+        backgroundColor: '#19224B', height: '39rem', width: '24rem',
+        '@media (max-width: 700px)': {
+            width: '60vw',
+        },
+        display: 'flex', justifyContent: 'center', paddingTop: 5,
         opacity: 0, // Set initial opacity to 0
         transition: 'opacity 0.5s ease-in', marginBottom: 5,
 
@@ -309,15 +322,68 @@ const DashboardPage = () => {
 
                     <Paper sx={paperStyleProgress_1} ref={componentRef3_1} />
 
-                    <TailPaper ref={componentPaper_1} bottom='31rem' left='1rem' />
+                    <TailPaper ref={componentPaper_1} bottom='31rem' left='1rem' >
+                        <Typography sx={{ color: 'white', fontWeight: 800, fontSize: 22,
+                       '@media (max-width: 400px)': {
+                        fontSize: 14,
+                      }, }}>Improved styling with css</Typography>
+                        <Typography sx={{ color: '#BEBEBE', fontWeight: 800, fontSize: 16,     '@media (max-width: 400px)': {
+                            fontSize: 10,}
+                            }}>Codeacademy</Typography>
+                        
+                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Codeacademy</Typography>
+                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
+                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
+
+
+                    </TailPaper>
+
 
                     <Paper sx={paperStyleProgress_2} ref={componentRef3_2} />
+                    {window.innerWidth < 1250 && (
+                        <TailPaper ref={componentPaper_2_small} bottom='10rem' left='1rem' >
+                            <Typography sx={{ color: 'white', fontWeight: 800, fontSize: 22,
+                        '@media (max-width: 400px)': {
+                            fontSize: 14,
+                          },
+                      
+                          }}>Desenvolvimento em React</Typography>
+                            <Typography sx={{ color: '#BEBEBE', fontWeight: 800, fontSize: 16, 
+                            '@media (max-width: 400px)': {
+                                fontSize: 10,}
+                                 }}>Estágio de Férias no BTG </Typography>
+                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Codeacademy</Typography>
+                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
+                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
+                        </TailPaper>
+                    )}
+                    {window.innerWidth >= 1250 && (
+                        <TailPaper ref={componentPaper_2} isPropTrue bottom='10rem' left='-30rem' >
+                            <Typography sx={{ color: 'white', fontWeight: 800, fontSize: 22 }}>Desenvolvimento em React</Typography>
+                            <Typography sx={{ color: '#BEBEBE', fontWeight: 800, fontSize: 16 }}>Estágio de Férias no BTG </Typography>
+                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Codeacademy</Typography>
+                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
+                            <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
+                        </TailPaper>
 
-                    <TailPaper ref={componentPaper_2} isPropTrue={isPropTrue} bottom='10rem' left='-30rem' sx={tailPaperStyle} />
+                    )}
+
 
                     <Paper sx={paperStyleProgress_3} ref={componentRef3_3} />
 
-                    <TailPaper bottom='-11rem' ref={componentPaper_3} sx={{}} left='1rem' />
+                    <TailPaper bottom='-11rem' ref={componentPaper_3} left='1rem' >
+                        <Typography sx={{ color: 'white', fontWeight: 800, fontSize: 22,
+                    '@media (max-width: 400px)': {
+                        fontSize: 14,
+                      }, }}>Desenvolvimento em React</Typography>
+                        <Typography sx={{ color: '#BEBEBE', fontWeight: 800, fontSize: 16,
+                    '@media (max-width: 400px)': {
+                        fontSize: 10,
+                      }, }}>Estágio de Férias no BTG </Typography>
+                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Codeacademy</Typography>
+                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
+                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Codeacademy</Typography>
+                    </TailPaper>
 
                 </Grid>
 

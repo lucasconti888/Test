@@ -47,18 +47,18 @@ body {
   height: 0;
   border-top: 12px solid transparent;
   border-bottom: 12px solid transparent;
-  border-right: 12px solid #ffffff;
+  border-right: 12px solid #19224B;
 }
 
 .speaking-box-tail2 {
   position: absolute;
-  left: -11px;
-  top: 200px;
+  right: -11px;
+  top: 10px;
   width: 0;
   height: 0;
   border-top: 12px solid transparent;
   border-bottom: 12px solid transparent;
-  border-right: 12px solid #ffffff;
+  border-left: 12px solid #19224B;
 }
 
 
