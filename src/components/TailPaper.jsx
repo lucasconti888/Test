@@ -32,10 +32,10 @@ export const TailPaper = forwardRef(({ bottom, left, right, sx, children, isProp
           borderColor:'white',
           ...sx, // Add the 'sx' prop here
           '@media (max-width: 700px)': {
-            width: '60vw',
+            width: '60vw',paddingLeft:3,
           },
           '@media (max-width: 400px)': {
-            width: '50vw',
+            width: '50vw',paddingLeft:2,
           },
         }}
       >

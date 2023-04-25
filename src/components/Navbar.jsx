@@ -16,10 +16,11 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
+
 const navItems = ['Início', 'Sobre mim', 'Contato'];
 
 function DrawerAppBar(props) {
-  const { window } = props;
+  const { window, aboutRef, contactRef, inicioRef } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -68,11 +69,28 @@ function DrawerAppBar(props) {
             Portfólio
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
-            ))}
+          <List sx={{display:'flex', }}>
+        {navItems.map((item) => (
+          <ListItem key={item} disablePadding>
+            <ListItemButton
+              sx={{ textAlign: 'center', minWidth:'150px'}}
+              onClick={() => {
+                if (item === 'Sobre mim' && aboutRef.current) {
+                  aboutRef.current.scrollIntoView({ behavior: 'smooth' });
+                } else if (item === 'Contato' && contactRef.current) {
+                  contactRef.current.scrollIntoView({ behavior: 'smooth' });
+                }
+                else if (item === 'Início' && inicioRef.current) {
+                  inicioRef.current.scrollIntoView({ behavior: 'smooth' });
+                }
+                setMobileOpen(false);
+              }}
+            >
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
           </Box>
         </Toolbar>
       </AppBar>

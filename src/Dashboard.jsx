@@ -10,7 +10,9 @@ import gifLoad2 from './flowers.gif'
 const DashboardPage = () => {
 
 
-
+    const inicioRef = useRef(null);
+    const aboutRef = useRef(null);
+    const contactRef = useRef(null);
 
     //  AQUI SÃO DEFINIDAS AS REFERÊNCIAS QUE SERÃO UTILIZADAS 
     //  PARA OS EFEITOS DE DETECTÇÃO DE 'VIEWPORT'
@@ -196,15 +198,22 @@ const DashboardPage = () => {
     // As seguintes constantes definem o estilo de alguns componentes
 
 
-    const tailPaperStyle = {
-        transition: 'left 0.5s ease-in, opacity 0.5s ease-in',
-        // '@media (min-width: 1250px)': {
-        //     transform: 'rotate(0.5turn)',
-        // },
-        // '@media (max-width: 1250px)': {
-        //     left: '10rem !important',
-        // },
+    const textStyle = {
+        color: 'white', fontWeight: 600, fontSize: 14, marginTop: 1,'@media (max-width: 450px)': {
+            fontSize: 10,
+        },'@media (max-width: 550px)': {
+            fontSize: 12,
+        }, '@media (max-width: 400px)': {
+            fontSize: 9,
+        },
     }
+
+    const textStyle3 = {
+    color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1,'@media (max-width: 450px)': {
+        fontSize: 10,
+    },'@media (max-width: 550px)': {
+        fontSize: 12,
+    }   }
 
     const paperStyle2 = {
         backgroundColor: 'white',
@@ -269,30 +278,47 @@ const DashboardPage = () => {
     }
 
     const paperStyle3 = {
-        backgroundColor: '#19224B', height: '32rem', width: '25rem', borderRadius: 5,
+        backgroundColor: '#0B0F22', height: '33rem', width: '30rem', borderRadius: 5,
         '@media (max-width: 700px)': {
-            width: '60vw',
+            width: '26rem',height: '22rem',
+        },
+        '@media (max-width: 600px)': {
+            width: '18rem',height: '22rem',
+        },
+        '@media (max-width: 450px)': {
+            width: '16rem',
+        },'@media (max-width: 400px)': {
+            width: '16rem',height: '19rem',
         },
         display: 'flex', justifyContent: 'flex-start', flexDirection: 'column', paddingLeft: 3, paddingTop: 3,
         opacity: 0, // Set initial opacity to 0
-        transition: 'opacity 0.5s ease-in', marginBottom: 5, marginTop: 5
+        transition: 'opacity 0.5s ease-in', marginBottom: 5, marginTop: 5, border:5, borderColor:'white'
     }
     const paperStyle3_2 = {
         backgroundColor: 'transparent', display: 'flex', justifyContent: 'center', paddingTop: 5, boxShadow: 0,
         opacity: 0, // Set initial opacity to 0
-        transition: 'opacity 0.5s ease-in, margin-left 0.5s ease-in', marginBottom: 5, marginLeft: 20,
-        width: '10rem'
+        transition: 'opacity 0.5s ease-in, margin-left 0.5s ease-in', marginBottom: 5,
+        width: '1vw', height:'15rem',
+        '@media (max-width: 700px)': {
+            height: '10rem',
+        },
+        '@media (max-width: 600px)': {
+           height: '8rem',
+        },
+        '@media (max-width: 450px)': {
+           height: '6rem',
+        },
     }
 
     return (
         <>
 
-            <DrawerAppBar />
+            <DrawerAppBar aboutRef={aboutRef} contactRef={contactRef} inicioRef={inicioRef}/>
 
             <Grid container sx={{ display: 'flex', flexDirection: 'row' }}>
 
-                <Grid item>
-
+                <Grid item >
+<Divider sx={{marginBottom:15, marginTop:-15}} ref={inicioRef}/>
                     <Grid ref={componentRefText_1} sx={{ display: 'flex', justifyContent: 'row', opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in', }}>
                         <Typography sx={{
                             fontSize: 40,
@@ -323,7 +349,11 @@ const DashboardPage = () => {
             </Grid>
 
             <Grid>
-                <Divider sx={{ marginTop: 100 }} />
+                
+                <Divider  sx={{ marginTop: 100 }} />
+                
+<Divider sx={{marginBottom:15, marginTop:-15}} ref={aboutRef}/>
+          
 
                 <Typography ref={componentRefText_3} sx={{
 
@@ -367,19 +397,23 @@ const DashboardPage = () => {
                     <TailPaper ref={componentPaper_1} bottom='31rem' left='1rem' >
                         <Typography sx={{
                             color: 'white', fontWeight: 800, fontSize: 22,
-                            '@media (max-width: 400px)': {
+                            '@media (max-width: 450px)': {
                                 fontSize: 14,
+                            }, '@media (max-width: 550px)': {
+                                fontSize: 15,
                             },
                         }}>Sistemas de Informação</Typography>
                         <Typography sx={{
-                            color: '#BEBEBE', fontWeight: 800, fontSize: 16, '@media (max-width: 400px)': {
+                            color: '#BEBEBE', fontWeight: 800, fontSize: 16, '@media (max-width: 450px)': {
                                 fontSize: 10,
-                            }
+                            }, '@media (max-width: 550px)': {
+                                fontSize: 15,
+                            },
                         }}>Inteli</Typography>
-                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 14, marginTop: 1 }}>Métodos de trabalho como Scrum, Lean e Kanban</Typography>
-                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 14, marginTop: 1 }}>Programação em Javascript, HTML e CSS</Typography>
-                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 14, marginTop: 1 }}>Introdução a Python, C++ e SQLite</Typography>
-                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 14, marginTop: 1 }}>Machine Learning e PLN com Python no Google Colab</Typography>
+                        <Typography sx={textStyle}>Métodos de trabalho como Scrum, Lean e Kanban</Typography>
+                        <Typography sx={textStyle}>Programação em Javascript, HTML e CSS</Typography>
+                        <Typography sx={textStyle}>Introdução a Python, C++ e SQLite</Typography>
+                        <Typography sx={textStyle}>Machine Learning e PLN com Python no Google Colab</Typography>
 
 
 
@@ -391,14 +425,14 @@ const DashboardPage = () => {
                         <TailPaper ref={componentPaper_2_small} bottom='10rem' left='1rem' >
                             <Typography sx={{
                                 color: 'white', fontWeight: 800, fontSize: 22,
-                                '@media (max-width: 400px)': {
+                                '@media (max-width: 450px)': {
                                     fontSize: 14,
                                 },
 
                             }}>Desenvolvimento em React</Typography>
                             <Typography sx={{
                                 color: '#BEBEBE', fontWeight: 800, fontSize: 16,
-                                '@media (max-width: 400px)': {
+                                '@media (max-width: 450px)': {
                                     fontSize: 10,
                                 }
                             }}>Estágio de Férias no BTG </Typography>
@@ -424,26 +458,26 @@ const DashboardPage = () => {
                     <TailPaper bottom='-11rem' ref={componentPaper_3} left='1rem' >
                         <Typography sx={{
                             color: 'white', fontWeight: 800, fontSize: 22,
-                            '@media (max-width: 400px)': {
+                            '@media (max-width: 450px)': {
                                 fontSize: 14,
                             },
                         }}>Conhecimentos gerais</Typography>
                         <Typography sx={{
                             color: '#BEBEBE', fontWeight: 800, fontSize: 16,
-                            '@media (max-width: 400px)': {
+                            '@media (max-width: 450px)': {
                                 fontSize: 10,
-                            },
+                            }
                         }}>Cursos online / presenciais </Typography>
-                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 2 }}>Voxy: Inglês 'High Intermediate'</Typography>
-                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Design Digital: Figma e prototipagem em geral</Typography>
-                        <Typography sx={{ color: 'white', fontWeight: 600, fontSize: 16, marginTop: 1 }}>Udemy e Codeacademy: Machine Learning e Desenvolvimento Frontend</Typography>
+                        <Typography sx={textStyle3}>Voxy: Inglês 'High Intermediate'</Typography>
+                        <Typography sx={textStyle3}>Design Digital: Figma e prototipagem em geral</Typography>
+                        <Typography sx={textStyle3}>Udemy e Codeacademy: Machine Learning e Desenvolvimento Frontend</Typography>
                     </TailPaper>
 
                 </Grid>
 
                 {/* O Divider abaixo é a linha branca do meio */}
 
-                <Divider variant='middle' sx={{ borderColor: 'white', borderWidth: 2, transform: 'rotate(0.25turn)', width: '60rem', marginTop: 80 }} />
+                <Divider variant='middle' sx={{ borderColor: 'white', borderWidth: 2, transform: 'rotate(0.25turn)', width: '55rem', marginTop: 83 }} />
 
             </Grid>
 
@@ -467,72 +501,160 @@ const DashboardPage = () => {
                 </Paper></Grid>
 
             </Grid>
+{/* ENTRE EM CONTATO */}
+<Divider sx={{marginBottom:15, marginTop:-15}} ref={contactRef}/>
 
-            {/* ENTRE EM CONTATO */}
+<Typography ref={componentRefText_5} sx={{
+  marginLeft: '5rem',
+  color: '#BEBEBE',
+  fontSize: {
+    xs: '1.5rem',
+    sm: '2rem'
+  },
+  opacity: 0,
+  transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',
+}}>
+  Entre em
+</Typography>
+<Typography ref={componentRefText_6} sx={{
+  marginLeft: '5rem',
+  marginBottom: 3,
+  fontSize: {
+    xs: '2rem',
+    sm: '2.5rem'
+  },
+  color: 'white',
+  opacity: 0,
+  transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',
+}}>
+  Contato
+</Typography>
 
-            <Typography ref={componentRefText_5} sx={{
-                marginLeft: '20rem',
+<Box sx={{ display: 'flex', justifyContent: 'center'}}>
+  <Grid>
+    <Paper ref={componentRef4_1} sx={paperStyle3}>
+      <Typography sx={{
+        color: 'white',
+        fontWeight: 800,
+        fontSize: {
+          xs: '1.3rem',
+          sm: '1.6rem'
+        },
+        '@media (max-width: 700px)': {
+            fontSize: '0.8rem',
+          },
+          '@media (max-width: 400px)': {
+            fontSize: '0.6rem',
+          }
+      }}>
+        Linkedin
+      </Typography>
+      <Typography sx={{
+        color: '#BEBEBE',
+        fontWeight: 800,
+        fontSize: {
+          xs: '0.8rem',
+          sm: '1.3rem'
+        },
+        marginTop: 1,
+        '@media (max-width: 700px)': {
+            fontSize: '0.8rem',
+          },'@media (max-width: 550px)': {
+            fontSize: '0.7rem',
+          },
+          '@media (max-width: 400px)': {
+            fontSize: '0.6rem',
+          }
+      }}>
+        https://www.linkedin.com/in/lucas-conti-pereira-3410b1233/
+      </Typography>
 
-                color: '#BEBEBE',
-                fontSize: 30, opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',
-            }}>Entre em</Typography>
-            <Typography ref={componentRefText_6} sx={{
-                marginLeft: '20rem', marginBottom: 3, fontSize: 36,
-                color: 'white',
-                opacity: 0, transition: 'margin-left 0.5s ease-in, opacity 0.5s ease-in',
-            }}>Contato</Typography>
+      <Typography sx={{
+        color: 'white',
+        fontWeight: 800,
+        fontSize: {
+          xs: '1.3rem',
+          sm: '1.6rem'
+        },
+        marginTop: 3,
+        '@media (max-width: 700px)': {
+            fontSize: '0.8rem',
+          },
+          '@media (max-width: 400px)': {
+            fontSize: '0.6rem',
+          }
+      }}>
+        Email
+      </Typography>
+      <Typography sx={{
+        color: '#BEBEBE',
+        fontWeight: 800,
+        fontSize: {
+          xs: '1.2rem',
+          sm: '1.5rem'
+        },
+        marginTop: 1,
+        '@media (max-width: 700px)': {
+          fontSize: '0.8rem',
+        },
+        '@media (max-width: 400px)': {
+            fontSize: '0.6rem',
+          }
+      }}>
+        lucas.pereira@sou.inteli.edu.br
+      </Typography>
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', marginRight: 5 }}>
-
-                <Grid><Paper ref={componentRef4_1} sx={paperStyle3}>
-
+      <Typography sx={{
+        color: 'white',
+        fontWeight: 800,
+        fontSize: {
+          xs: '1.3rem',
+          sm: '1.6rem'
+        },
+        marginTop: 3,
+        '@media (max-width: 700px)': {
+            fontSize: '0.8rem',
+          },
+          '@media (max-width: 400px)': {
+            fontSize: '0.6rem',
+          }
+      }}>
+        Celular
+      </Typography>
+      <Typography sx={{
+        color: '#BEBEBE',
+        fontWeight: 800,
+        fontSize: {
+          xs: '1.2rem',
+          sm: '1.5rem'
+        },
+        marginTop: 1,
+        '@media (max-width: 700px)': {
+            fontSize: '0.8rem',
+          },
+          '@media (max-width: 400px)': {
+            fontSize: '0.6rem',
+          }
+      }}>
+        +55 11 97996-8324
+      </Typography>
 
                     <Typography sx={{
-                        color: 'white', fontWeight: 800, fontSize: 22,
-                        '@media (max-width: 400px)': {
-                            fontSize: 14,
-                        },
-                    }}>Linkedin</Typography>
-                    <Typography sx={{
-                        color: '#BEBEBE', fontWeight: 800, fontSize: 16, marginTop: 2, '@media (max-width: 400px)': {
-                            fontSize: 10,
-                        }
-                    }}>https://www.linkedin.com/in/lucas-conti-pereira-3410b1233/</Typography>
-
-                    <Typography sx={{
-                        color: 'white', fontWeight: 800, fontSize: 22, marginTop: 5,
-                        '@media (max-width: 400px)': {
-                            fontSize: 14,
-                        },
-                    }}>Email</Typography>
-                    <Typography sx={{
-                        color: '#BEBEBE', fontWeight: 800, fontSize: 20, marginTop: 2, '@media (max-width: 400px)': {
-                            fontSize: 10,
-                        }
-                    }}>lucas.pereira@sou.inteli.edu.br</Typography>
-
-                    <Typography sx={{
-                        color: 'white', fontWeight: 800, fontSize: 22, marginTop: 5,
-                        '@media (max-width: 400px)': {
-                            fontSize: 14,
-                        },
-                    }}>Celular</Typography>
-                    <Typography sx={{
-                        color: '#BEBEBE', fontWeight: 800, fontSize: 20, marginTop: 2, '@media (max-width: 400px)': {
-                            fontSize: 10,
-                        }
-                    }}>+55 11 97996-8324</Typography>
-
-                    <Typography sx={{
-                        color: 'white', fontWeight: 800, fontSize: 22, marginTop: 5,
-                        '@media (max-width: 400px)': {
-                            fontSize: 14,
-                        },
+                        color: 'white', fontWeight: 800, fontSize: 22, marginTop: 3,
+                        '@media (max-width: 700px)': {
+                            fontSize: '0.8rem',
+                          },
+                          '@media (max-width: 400px)': {
+                            fontSize: '0.6rem',
+                          }
                     }}>GitHub</Typography>
                     <Typography sx={{
-                        color: '#BEBEBE', fontWeight: 800, fontSize: 20, marginTop: 2, '@media (max-width: 400px)': {
-                            fontSize: 10,
-                        }
+                        color: '#BEBEBE', fontWeight: 800, fontSize: 20, marginTop: 2,  '@media (max-width: 700px)': {
+                            fontSize: '0.8rem',
+                          },
+                          '@media (max-width: 400px)': {
+                            fontSize: '0.6rem',
+                          }
                     }}>lucasconti888</Typography>
 
 
@@ -544,6 +666,7 @@ const DashboardPage = () => {
 
                 </Paper>
                 </Grid>
+               
 
             </Box>
 
