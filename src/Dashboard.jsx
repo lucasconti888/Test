@@ -278,7 +278,7 @@ const DashboardPage = () => {
     }
 
     const paperStyle3 = {
-        backgroundColor: '#0B0F22', height: '33rem', width: '30rem', borderRadius: 5,
+        backgroundColor: '#0B0F22', height: '30rem', width: '30rem', borderRadius: 5,
         '@media (max-width: 700px)': {
             width: '26rem',height: '22rem',
         },
@@ -297,16 +297,16 @@ const DashboardPage = () => {
     const paperStyle3_2 = {
         backgroundColor: 'transparent', display: 'flex', justifyContent: 'center', paddingTop: 5, boxShadow: 0,
         opacity: 0, // Set initial opacity to 0
-        transition: 'opacity 0.5s ease-in, margin-left 0.5s ease-in', marginBottom: 5,
+        transition: 'opacity 0.5s ease-in, margin-left 0.5s ease-in', marginBottom: 5, marginLeft:'10vw',
         width: '1vw', height:'15rem',
         '@media (max-width: 700px)': {
-            height: '10rem',
+            height: '10rem', marginLeft:0,
         },
         '@media (max-width: 600px)': {
-           height: '8rem',
+           height: '8rem',marginLeft:0,
         },
         '@media (max-width: 450px)': {
-           height: '6rem',
+           height: '6rem',marginLeft:0,
         },
     }
 
@@ -529,6 +529,12 @@ const DashboardPage = () => {
 }}>
   Contato
 </Typography>
+
+
+
+
+
+
 
 <Box sx={{ display: 'flex', justifyContent: 'center'}}>
   <Grid>
