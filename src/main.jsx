@@ -9,13 +9,8 @@ import './global.css';
 const router = createBrowserRouter ([
   {
     path: "/",
-    element: <LoginPage/>
-  },
-  {
-    path: "/dashboard",
     element: <DashboardPage/>
-  },
-
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
