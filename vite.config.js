@@ -6,8 +6,20 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: ["react", "react-dom", 'react-router-dom'],
+      output: {
+        globals: {
+          react: "react",
+        },
+      },
     },
   },
-
+  resolve: {
+    alias: {
+      react: 'react', // specify the path to the react module
+    },
+    // specify the base URL for resolving module specifiers
+    // this should be the root of your project directory
+    baseUrl: './', 
+  },
 })
 
