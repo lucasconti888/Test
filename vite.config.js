@@ -1,8 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import * as path from 'path'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   build: {
@@ -17,7 +15,11 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      react: path.resolve(__dirname, 'node_modules', 'react'),
-    }
-  }
+      react: 'react', // specify the path to the react module
+    },
+    // specify the base URL for resolving module specifiers
+    // this should be the root of your project directory
+    baseUrl: './', 
+  },
 })
+
